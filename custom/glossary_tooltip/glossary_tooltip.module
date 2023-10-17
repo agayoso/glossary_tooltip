@@ -1,0 +1,45 @@
+<?php
+
+use Drupal\node\NodeInterface;
+use Drupal\taxonomy\Entity\Term;
+
+function glossary_tooltip_node_view(array &$build, NodeInterface $node, $display, $view_mode) {
+  if ($node->getType() === 'article' && ($view_mode === 'full' || $view_mode === 'teaser')) {
+    $build['#attached']['library'][] = 'glossary_tooltip/glossary_tooltip';
+    $glossary_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('glossary');
+
+    if (isset($build['body'][0]['#markup'])) {
+      foreach ($glossary_terms as $term) {
+          $termEntity = Term::load($term->tid);
+          if ($termEntity) {
+              $description = $termEntity->getDescription();
+              if ($description) {
+                  $build['body'][0]['#markup'] = str_replace(
+                      $term->name,
+                      '<span class="glossary-highlight" data-description="' . $description . '">' . $term->name . '</span>',
+                      $build['body'][0]['#markup']
+                  );
+              }
+          }
+      }
+    }
+  }
+}
+
+function glossary_tooltip_library_info() {
+  $libraries['glossary_tooltip_styles'] = [
+    'version' => '1.0',
+    'css' => [
+      'base' => [
+        'css/glossary_tooltip.css' => [],
+      ],
+    ],
+    'js' => [
+      'js/glossary_tooltip.js' => [],
+    ],
+    'dependencies' => [
+      'jquery_ui_tooltip/tooltip',
+    ],
+  ];
+  return $libraries;
+}

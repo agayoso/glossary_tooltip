@@ -1,0 +1,4 @@
+.glossary-highlight {
+  background-color: #ffffcc;
+  cursor: help;
+}

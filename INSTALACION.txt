@@ -1,0 +1,14 @@
+**************
+el contenido de la carpeta back-end task debe ir dentro de la carpeta modules,
+en el entorno de drupal
+**************
+REQUISITOS:
+instalar un servidor como wampserver o xampp
+instalamos composer, luego:
+composer require components/jquery
+composer require 'drupal/jquery_ui_tooltip:^1.1'
+si ya tenemos un directorio drupal descargado, hacemos:
+php ./core/scripts/drupal quick-start
+activamos e instalamos el modulo custom glossary_tooltip a drupal,
+luego, en un articulo con un parrafo, veriamos el dialogo en las 
+palabras del vocabulario que creamos, que deberia llamarse "glossary".

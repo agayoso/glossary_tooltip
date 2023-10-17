@@ -1,0 +1,10 @@
+name: 'Glossary Tooltip'
+type: module
+description: 'Highlight glossary terms and show their descriptions as tooltips.'
+core_version_requirement: ^8 || ^9
+package: Custom
+dependencies:
+  - drupal:taxonomy
+  - drupal:jquery_ui_tooltip
+version: '1.0'
+project: 'glossary_tooltip'
